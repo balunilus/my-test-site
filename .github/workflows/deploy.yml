@@ -24,6 +24,8 @@ jobs:
         run: |
           # vendor మరియు web ఫైళ్లను సురక్షితంగా AWS సర్వర్‌కి పంపడం
           rsync -avz --delete \
+            --no-perms --no-owner --no-group \
+            --chmod=D2775,F0664 \
             --exclude='.git*' \
             --exclude='web/sites/default/files' \
             --exclude='web/sites/default/settings.php' \
