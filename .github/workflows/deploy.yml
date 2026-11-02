@@ -3,7 +3,7 @@ name: Drupal 11 AWS Deployment Pipeline
 on:
   push:
     branches:
-      - main # మీరు 'main' బ్రాంచ్‌లో పుష్ చేసినప్పుడు మాత్రమే రన్ అవుతుంది
+      - main
 
 jobs:
   deploy:
@@ -22,30 +22,8 @@ jobs:
 
       - name: Deploy Code via Rsync to AWS
         run: |
-          # vendor మరియు web ఫైళ్లను సురక్షితంగా AWS సర్వర్‌కి పంపడం
-          rsync -avz --delete \
-            --no-perms --no-owner --no-group \
-            --chmod=D2775,F0664 \
-            --exclude='.git*' \
-            --exclude='web/sites/default/files' \
-            --exclude='web/sites/default/settings.php' \
-            -e "ssh -i ~/.ssh/id_rsa" \
-            ./ ubuntu@${{ secrets.AWS_SERVER_IP }}:/var/www/html/
+          rsync -avz --delete --no-perms --no-owner --no-group --chmod=D2775,F0664 --exclude='.git*' --exclude='web/sites/default/files/***' --exclude='web/sites/default/settings.php' -e "ssh -i ~/.ssh/id_rsa" ./ ubuntu@${{ secrets.AWS_SERVER_IP }}:/var/www/html/
 
       - name: Run Drupal Post-Deployment Operations
         run: |
-          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.AWS_SERVER_IP }} << 'EOF'
-            cd /var/www/html
-            
-            # 1. డిపెండెన్సీలను ఇన్‌స్టాల్ చేయడం (Sudo లేకుండా)
-            composer install --no-dev --optimize-autoloader
-            
-            # 2. డ్రూపల్ 11 కొత్త 'dr' CLI ద్వారా కాషే రీబిల్డ్ చేయడం
-            ./vendor/bin/dr cache:rebuild
-            
-            # 3. ఒకవేళ డ్రూపల్ కాన్ఫిగరేషన్ ఇంపోర్ట్ చేయాల్సి వస్తే (Drush ఉంటే):
-            # vendor/bin/drush cim -y
-            
-            # 4. చివరగా Apache గ్రూప్ కి యాక్సెస్ పటిష్టం చేయడం
-            sudo chown -R www-data:www-data /var/www/html/web/sites/default/files 2>/dev/null || true
-          EOF
+          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.AWS_SERVER_IP }} "cd /var/www/html && composer install --no-dev --optimize-autoloader && ./vendor/bin/dr cache:rebuild && sudo chown -R www-data:www-data /var/www/html/web/sites/default/files 2>/dev/null || true"
