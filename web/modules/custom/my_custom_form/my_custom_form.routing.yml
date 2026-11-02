@@ -1,0 +1,7 @@
+my_custom_form.details:
+  path: '/custom-form'
+  defaults:
+    _form: '\Drupal\my_custom_form\Form\BasicDetailsForm'
+    _title: 'Contact details'
+  requirements:
+    _permission: 'access content'

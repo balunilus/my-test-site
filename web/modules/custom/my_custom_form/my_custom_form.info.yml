@@ -1,0 +1,5 @@
+name: My Custom Form
+type: module
+description: Provides a form for collecting a person's name and email address.
+package: Custom
+core_version_requirement: ^11
