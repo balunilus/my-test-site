@@ -1,0 +1,26 @@
+name: my_custom_theme
+type: theme
+'base theme': false
+version: 1.0.0
+libraries:
+  - my_custom_theme/base
+  - my_custom_theme/messages
+  - core/normalize
+libraries-extend:
+  user/drupal.user:
+    - my_custom_theme/user
+  core/drupal.dropbutton:
+    - my_custom_theme/dropbutton
+  core/drupal.dialog:
+    - my_custom_theme/dialog
+  file/drupal.file:
+    - my_custom_theme/file
+  core/drupal.item-list:
+    - my_custom_theme/item-list
+  core/drupal.progress:
+    - my_custom_theme/progress
+  core/drupal.tablesort:
+    - my_custom_theme/drupal.tablesort
+description: ''
+core_version_requirement: ^11
+generator: 'starterkit_theme:11.4.11'

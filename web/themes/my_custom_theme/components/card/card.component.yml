@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card
+description: A reusable article card using the article image and URL fields.
+props:
+  type: object
+  required:
+    - title
+  properties:
+    title:
+      type: string
+      title: Title
+      description: The card heading.
+      examples:
+        - About us
+    summary:
+      type: string
+      title: Summary
+      description: Optional supporting text for the card.
+      examples:
+        - Learn more about our organization.
+    field_image:
+      type: object
+      title: Image
+      description: Rendered field_image field.
+    field_url:
+      type: object
+      title: URL
+      description: Rendered field_url field.

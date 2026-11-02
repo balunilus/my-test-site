@@ -1,0 +1,46 @@
+# ==============================================================================
+# DRUPAL CORE & COMPOSER IGNORES
+# ==============================================================================
+# Ignore Composer vendor packages (managed via composer.json)
+/vendor/
+
+# Ignore Drupal core files if managed by Composer
+/web/core/
+
+# ==============================================================================
+# SITE-SPECIFIC & USER-GENERATED FILES
+# ==============================================================================
+# Ignore user-uploaded files, cache, and generated styles
+/web/sites/*/files/
+/web/sites/*/private/
+
+# Ignore local settings and local service definitions
+/web/sites/*/settings.local.php
+/web/sites/*/services.local.yml
+
+# Ignore development settings and credentials
+/web/sites/*/settings.dev.php
+/web/sites/*/settings.staging.php
+
+# ==============================================================================
+# IDE, SYSTEM, & OS TEMPORARY FILES
+# ==============================================================================
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# ==============================================================================
+# DDEV REPOSITORY ALLOWANCE
+# ==============================================================================
+# Ensure the .ddev folder itself is tracked, while allowing .ddev's own gitignore to run
+!/.ddev/

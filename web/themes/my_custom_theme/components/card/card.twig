@@ -1,0 +1,21 @@
+<article class="card">
+  {% if field_image %}
+    <div class="card__image">
+      {{ field_image }}
+    </div>
+  {% endif %}
+
+  <div class="card__content">
+    <h2 class="card__title">{{ title }}</h2>
+
+    {% if summary %}
+      <p class="card__summary">{{ summary }}</p>
+    {% endif %}
+
+    {% if field_url %}
+      <div class="card__link">
+        {{ field_url }}
+      </div>
+    {% endif %}
+  </div>
+</article>
