@@ -1,0 +1,42 @@
+{# ఒక వరుసకు 4 కార్డ్‌లు వచ్చేలా CSS Grid స్ట్రక్చర్ #}
+<div class="articles-grid-container">
+  {% for row in rows %}
+    {# ప్రతి ఆర్టికల్ ఒక కార్డ్‌లాగా మారుతుంది #}
+    <div class="article-card-item">
+      {{ row.content }}
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+/* గ్రిడ్ కంటైనర్ */
+.articles-grid-container {
+  display: grid;
+  /* ఇది స్క్రీన్ సైజును బట్టి ఆటోమేటిక్‌గా కార్డ్‌లను సర్దుతుంది, గరిష్టంగా ఒక వరుసకు 4 వస్తాయి */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 20px;
+  width: 100%;
+  max-width: 100%; /* స్క్రీన్ దాటి బయటకు వెళ్లకుండా నియంత్రిస్తుంది */
+  box-sizing: border-box;
+  padding: 10px;
+  overflow: hidden; /* అదనపు కంటెంట్‌ను లోపలే ఉంచుతుంది */
+}
+
+/* సింగిల్ కార్డ్ ఐటమ్ */
+.article-card-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* కార్డ్ లోపల ఉండే ఇమేజ్ స్క్రీన్‌ను దాటకుండా ఉండడానికి */
+.article-card-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+</style>
